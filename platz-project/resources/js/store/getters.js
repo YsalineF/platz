@@ -10,6 +10,19 @@ let getters = {
       return ressources
     }
   },
+  //Retourne la ressource en fonction de son id
+  getRessourceById(state) {
+    return function(id) {
+      return state.ressources.find(ressource => ressource.id == id)
+    }
+  },
+  // Retourne un certain nombre de ressources en fonction de l'élément categorie_id de la ressource
+  getRessourcesByCategorieId(state) {
+    return function(data) {
+      let ressources = {...state.ressources.filter(ressource => ressource.categorie_id === data).slice(0,4)}
+      return ressources
+    }
+  },
 
   /* ----------------------- CATEGORIES ----------------------- */
   // Retourne toutes les catégories
@@ -20,6 +33,13 @@ let getters = {
   getCategoriesByRessourceId(state) {
     return function(data) {
       return state.categories.find(categorie => categorie.id === data.categorie_id)
+    }
+  },
+
+  /* ----------------------- USERS ----------------------- */
+  getUserByRessourceId(state) {
+    return function(data) {
+      return state.users.find(user => user.id === data.user_id)
     }
   }
 }
