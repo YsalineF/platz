@@ -5,13 +5,13 @@
         <section class="work" v-for="ressource in ressources" :key="ressource.id">
 
           <figure class="white">
-            <a href="details.html">
+            <router-link :to="{name: 'show', params: { id: ressource.id }}">
               <img :src="`assets/img/${ressource.image}`" :alt="ressource.nom" />
               <dl>
                 <dt>{{ ressource.nom }}</dt>
                 <dd>{{ ressource.description }}</dd>
               </dl>
-            </a>
+            </router-link>
             <div id="wrapper-part-info">
               <div class="part-info-image">
                 <img :src="`assets/img/${categories(ressource).icone}`" :alt="categories(ressource).nom" width="28" height="28"/>

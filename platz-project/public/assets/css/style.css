@@ -839,3 +839,22 @@ body,html{
 @media only screen and (max-width: 320px) {
 
 }
+
+.title-icon{
+	float:left;
+	width:68px;
+	height:68px;
+	background: url(../img/title-icon-ps.svg) no-repeat;
+	margin-right:20px;
+}
+
+.image-reply-post{background: url(../img/avatar.png) no-repeat;}
+.image-reply-post-2{background: url(../img/avatar-2.png) no-repeat;}
+
+.image-reply-post,.image-reply-post-2{
+  float:left;
+  width:65px;
+  height:65px;
+  background: url(../img/avatar.png) no-repeat;
+  top:0;
+}
