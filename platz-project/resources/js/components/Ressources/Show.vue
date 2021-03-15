@@ -40,10 +40,10 @@
           </div>
 
           <div class="wrapper-morefrom">
-            <div class="text-morefrom">More from {{ categorie.nom }}</div>
+            <div class="text-morefrom">More from {{ categorie(ressource).nom }}</div>
             <div class="image-morefrom">
-              <router-link v-for="ressource in moreRessources" :key="ressource.id" :to="{ name: 'show', params: {id: ressource.id} }">
-                <div :class="`image-morefrom-${ressource.id}`">
+              <router-link v-for="(ressource,index) in moreRessources" :key="ressource.id" :to="{ name: 'show', params: {id: ressource.id} }">
+                <div :class="`image-morefrom-${ Number(index) + 1 }`">
                   <img :src="`assets/img/${ressource.image}`" :alt="ressource.nom" width="430" height="330"/>
                 </div>
               </router-link>

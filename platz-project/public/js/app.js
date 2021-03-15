@@ -59939,13 +59939,13 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "wrapper-morefrom" }, [
             _c("div", { staticClass: "text-morefrom" }, [
-              _vm._v("More from " + _vm._s(_vm.categorie.nom))
+              _vm._v("More from " + _vm._s(_vm.categorie(_vm.ressource).nom))
             ]),
             _vm._v(" "),
             _c(
               "div",
               { staticClass: "image-morefrom" },
-              _vm._l(_vm.moreRessources, function(ressource) {
+              _vm._l(_vm.moreRessources, function(ressource, index) {
                 return _c(
                   "router-link",
                   {
@@ -59955,16 +59955,20 @@ var render = function() {
                     }
                   },
                   [
-                    _c("div", { class: "image-morefrom-" + ressource.id }, [
-                      _c("img", {
-                        attrs: {
-                          src: "assets/img/" + ressource.image,
-                          alt: ressource.nom,
-                          width: "430",
-                          height: "330"
-                        }
-                      })
-                    ])
+                    _c(
+                      "div",
+                      { class: "image-morefrom-" + (Number(index) + 1) },
+                      [
+                        _c("img", {
+                          attrs: {
+                            src: "assets/img/" + ressource.image,
+                            alt: ressource.nom,
+                            width: "430",
+                            height: "330"
+                          }
+                        })
+                      ]
+                    )
                   ]
                 )
               }),
