@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Categories;
 use App\Http\Controllers\Ressources;
 use App\Http\Controllers\Users;
+use App\Http\Controllers\Commentaires;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,7 @@ Route::resource('ressources', Ressources::class)->except(['show', 'create', 'edi
 // API des Users
 // CTRL: Users
 Route::resource('users', Users::class)->except(['show', 'create', 'edit']);
+
+// API des Commentaires
+// CTRL: Commentaires
+Route::resource('commentaires', Commentaires::class)->except(['show', 'create', 'edit']);
