@@ -40,5 +40,6 @@ const app = new Vue({
       this.$store.dispatch('setRessources')
       this.$store.dispatch('setCategories')
       this.$store.dispatch('setUsers')
+      this.$store.dispatch('setCommentaires')
     }
 });
