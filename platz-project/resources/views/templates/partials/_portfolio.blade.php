@@ -2,9 +2,9 @@
 
 	<div id="wrapper-container">
 
-		<div id="app">
+		{{-- <div id="app"> --}}
 			<router-view></router-view>
-		</div>
+		{{-- </div> --}}
 
 	<div id="wrapper-thank">
     	<div class="thank">
