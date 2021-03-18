@@ -7,6 +7,9 @@ let mutations = {
   },
   SET_USERS(state, data) {
     state.users = data;
+  },
+  SET_COMMENTAIRES(state, data) {
+    state.commentaires = data;
   }
 }
 

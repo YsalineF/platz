@@ -41,7 +41,25 @@ let getters = {
     return function(data) {
       return state.users.find(user => user.id === data.user_id)
     }
+  },
+
+  /* ---------------------- COMMENTAIRES ------------------*/
+  getCommentaires(state){
+    return state.commentaires;
+  },
+
+  getCommentaireById(state) {
+    return function (id) {
+      return state.commentaires.find(commentaire => commentaire.id == id);
+    }
+  },
+
+  getCommentairesByRessourceId(state) {
+    return function (id){
+      return state.commentaires.filter(commentaires => commentaires.ressource.id == id);
   }
+},
+
 }
 
 export default getters;
