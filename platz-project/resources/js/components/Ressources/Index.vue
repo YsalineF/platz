@@ -44,12 +44,18 @@ export default {
     return {
       params: {
         start: 0,
-        end: 10
+        end: 20
       }
     }
   },
   computed: {
     ressources() {
+      let idCat = this.$route.params.id;
+
+      if (typeof idCat !== 'undefined'){
+        return this.$store.getters.getRessourcesByCategorieId(this.$route.params.id);
+      }
+
       // Retourne un certain nombre de ressources (le nombre dépend des params)
       return this.$store.getters.getRessources(this.params)
     },

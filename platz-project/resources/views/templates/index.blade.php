@@ -9,26 +9,15 @@
 
 <!-- CACHE -->
 <div class="cache"></div>
-
+<div id="app">
   @include('templates.partials._header')
-
-  @include('templates.partials._navbar')
-
+  <menu-categories></menu-categories>
   @include('templates.partials._filter')
-
-
   @include('templates.partials._portfolio')
-
-
+</div>
 
   @include('templates.partials._scripts')
-
-
   @include('templates.partials._preloader')
-
-
-
-
 
 </body>
 
