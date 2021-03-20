@@ -60118,19 +60118,23 @@ var render = function() {
           )
         }),
         _vm._v(" "),
-        _c("router-link", { attrs: { to: { name: "index" } } }, [
-          _c("div", { attrs: { id: "bouton-premium" } }, [
-            _c("img", {
-              attrs: {
-                src: "assets/img/icon-premium.svg",
-                alt: "no filter",
-                title: "No Filter",
-                height: "38",
-                width: "90"
-              }
-            })
-          ])
-        ])
+        _c(
+          "router-link",
+          { attrs: { id: "wrapper-bouton-icon", to: { name: "index" } } },
+          [
+            _c("div", { attrs: { id: "bouton-premium" } }, [
+              _c("img", {
+                attrs: {
+                  src: "assets/img/icon-premium.svg",
+                  alt: "no filter",
+                  title: "No Filter",
+                  height: "38",
+                  width: "90"
+                }
+              })
+            ])
+          ]
+        )
       ],
       2
     )
