@@ -56,20 +56,21 @@
           <div id="title-post-send">
             <hr/><h2>Your comments</h2>
           </div>
-
-
         </div>
+        <!-- {{commentaires}} -->
+        <div class="post-reply" v-for="commentaire in commentaires" :key="commentaire.id">
+            <div class="">
+              <img :src="`assets/img/${user(commentaire).avatar}`" :alt="user(commentaire).pseudo" />
+            </div>
 
-        <div class="post-reply">
-          <div class="image-reply-post"></div>
-          <div class="name-reply-post">Igor vlademir</div>
-          <div class="text-reply-post">Awesome mockup, i like it very much ! It will help me for my website i was looking for since few days. Thank you a lot.</div>
-        </div>
+            <div class="name-reply-post">
+              <span class="">
+                 {{ user(commentaire).pseudo }}
+              </span>
+            </div>
 
-        <div class="post-reply-2">
-          <div class="image-reply-post-2"></div>
-          <div class="name-reply-post-2">Nathan Shaw</div>
-          <div class="text-reply-post-2">Well done ! I like the way you did it. Awesome ! </div>
+
+            <div class="text-reply-post">{{ commentaire.content }}</div>
         </div>
 
         <div class="post-send">
@@ -124,7 +125,18 @@
       moreRessources() {
         let categorieId = this.ressource.categorie_id
         return this.$store.getters.getRessourcesByCategorieId(categorieId)
-      }
+      },
+
+      commentaires() {
+        let id = this.$route.params.id;
+        return this.$store.getters.getCommentairesByRessourceId(id);
+
+      },
+      users() {
+          return this.$store.getters.getUsers;
+
+      },
+
     }
   }
 </script>
@@ -319,7 +331,7 @@
 
   .post-reply{margin-top:50px;}
 
-
+  /* .image-reply-post{background: url(../img/avatar.png) no-repeat;} */
 
   .name-reply-post,.name-reply-post-2{
   	float:left;
