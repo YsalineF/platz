@@ -2485,6 +2485,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var mutations = {
   SET_RESSOURCES: function SET_RESSOURCES(state, data) {
+    // Inspiration : https://stackoverflow.com/questions/42225073/how-to-sort-an-array-by-date-using-vue-js-2
+    data.sort(function (a, b) {
+      return new Date(b.created_at) - new Date(a.created_at);
+    });
     state.ressources = data;
   },
   SET_CATEGORIES: function SET_CATEGORIES(state, data) {
