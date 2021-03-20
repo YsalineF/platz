@@ -1880,6 +1880,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: {
     categories: function categories() {
@@ -60079,37 +60083,56 @@ var render = function() {
     _c(
       "div",
       { staticClass: "navbar object" },
-      _vm._l(_vm.categories, function(categorie) {
-        return _c(
-          "div",
-          { key: categorie.id, attrs: { id: "wrapper-bouton-icon" } },
-          [
-            _c(
-              "router-link",
-              {
-                attrs: {
-                  to: { name: "categories.show", params: { id: categorie.id } }
-                }
-              },
-              [
-                _c("div", { attrs: { id: "bouton-theme" } }, [
-                  _c("img", {
-                    attrs: {
-                      src: "assets/img/" + categorie.icone,
-                      alt: "",
-                      title: "",
-                      height: "28",
-                      width: "28"
+      [
+        _vm._l(_vm.categories, function(categorie) {
+          return _c(
+            "div",
+            { key: categorie.id, attrs: { id: "wrapper-bouton-icon" } },
+            [
+              _c(
+                "router-link",
+                {
+                  attrs: {
+                    to: {
+                      name: "categories.show",
+                      params: { id: categorie.id }
                     }
-                  })
-                ])
-              ]
-            )
-          ],
-          1
-        )
-      }),
-      0
+                  }
+                },
+                [
+                  _c("div", { attrs: { id: "bouton-theme" } }, [
+                    _c("img", {
+                      attrs: {
+                        src: "assets/img/" + categorie.icone,
+                        alt: "",
+                        title: "",
+                        height: "28",
+                        width: "28"
+                      }
+                    })
+                  ])
+                ]
+              )
+            ],
+            1
+          )
+        }),
+        _vm._v(" "),
+        _c("router-link", { attrs: { to: { name: "index" } } }, [
+          _c("div", { attrs: { id: "bouton-premium" } }, [
+            _c("img", {
+              attrs: {
+                src: "assets/img/icon-premium.svg",
+                alt: "no filter",
+                title: "No Filter",
+                height: "38",
+                width: "90"
+              }
+            })
+          ])
+        ])
+      ],
+      2
     )
   ])
 }
