@@ -12,7 +12,8 @@
 <div id="app">
   @include('templates.partials._header')
   <menu-categories></menu-categories>
-  @include('templates.partials._filter')
+  <menu-filter></menu-filter>
+  {{-- @include('templates.partials._filter') --}}
   @include('templates.partials._portfolio')
 </div>
 
