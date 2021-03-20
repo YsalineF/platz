@@ -11,7 +11,7 @@
         </div>
       </router-link>
     </div>
-    <router-link :to="{name: 'index'}">
+    <router-link id="wrapper-bouton-icon" :to="{name: 'index'}">
       <div id="bouton-premium">
           <img :src="'assets/img/icon-premium.svg'" alt="no filter" title="No Filter" height="38" width="90">
       </div>
