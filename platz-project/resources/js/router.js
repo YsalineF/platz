@@ -8,6 +8,7 @@ import RessourcesIndex from './components/ressources/Index'
 import RessourceShow from './components/ressources/Show'
 import Login from './components/Login'
 import Register from './components/Register'
+import AddRessources from './components/AddRessources'
 
 
 // Création du routing
@@ -38,6 +39,11 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: Register
+    },
+    {
+      path: '/add',
+      name: 'add',
+      component: AddRessources
     }
   ]
 })

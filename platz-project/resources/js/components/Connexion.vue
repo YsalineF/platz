@@ -26,8 +26,10 @@ export default {
     logout() {
       axios.post('api/logout', {user: this.$store.state.connectedUser})
             .then(response => {
-              this.$store.dispatch('logoutUser', response.data)
+              this.$store.dispatch('logoutUser', response.data.user)
             })
+      // Supprime l'item dans la session storage (voir inspecteur > application > session storage)
+      sessionStorage.clear()
     }
   }
 }

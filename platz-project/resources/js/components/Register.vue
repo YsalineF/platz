@@ -40,9 +40,11 @@ export default {
       axios.get('sanctum/csrf-cookie').then(response => {
         // Accede a la route pour s'enregister via les infos communiquees via le formulaire
         axios.post('api/auth/register', this.registerForm).then(response => {
-          this.$store.dispatch('loginUser', response.data)
-          // mise en place d'un item "connected" dans le local storage
-          localStorage.connected = 'true'
+          this.$store.dispatch('loginUser', response.data.user)
+          // Transforme les data du user connecté en un objet JSON
+          let connected = JSON.stringify(response.data.user)
+          // Afin de le stocker dans le session storage (voir inspecteur > application > session storage)
+          sessionStorage.setItem('connected', connected)
           // renvoie vers la route "index" donc vers la page d'accueil
           this.$router.push({name: "index"})
         })
