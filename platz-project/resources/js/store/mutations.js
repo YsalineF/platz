@@ -12,6 +12,12 @@ let mutations = {
   },
   SET_COMMENTAIRES(state, data) {
     state.commentaires = data;
+  },
+  LOGIN_USER(state, data) {
+    state.connectedUser = true
+  },
+  LOGOUT_USER(state) {
+    state.connectedUser = null
   }
 }
 
