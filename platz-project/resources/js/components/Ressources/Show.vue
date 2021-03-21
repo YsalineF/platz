@@ -4,7 +4,9 @@
     <div id="main-container-image">
 
       <div class="title-item">
-        <div class="title-icon"></div>
+        <div>
+          <img class="title-icone" :src="`assets/img/${categorie(ressource).icone}`" :alt="categorie(ressource).nom">
+        </div>
         <div class="title-text">{{ ressource.nom }}</div>
         <div class="title-text-2">{{ dateFormat(ressource.created_at) }} by {{ user(ressource).pseudo }}</div>
       </div>
@@ -20,7 +22,7 @@
 
 
           <div class="wrapper-file">
-            <div class="icon-file"><img src="assets/img/icon-psdfile.svg" alt="" width="21" height="21"/></div>
+            <div class="icon-file"><img :src="`assets/img/${categorie(ressource).icone}`" :alt="categorie(ressource).nom" width="21" height="21"/></div>
             <div class="text-file">{{ categorie(ressource).nom }}</div>
           </div>
 
@@ -142,6 +144,13 @@
 </script>
 
 <style scoped>
+
+.title-icone{
+	float:left;
+	width:68px;
+	height:68px;
+	margin-right:20px;
+}
   /*----------------------------*/
   /* MAIN DIV WITH IMAGE */
   /*----------------------------*/
