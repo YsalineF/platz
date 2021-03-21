@@ -14,10 +14,10 @@ let mutations = {
     state.commentaires = data;
   },
   LOGIN_USER(state, data) {
-    state.connectedUser = true
+    state.connectedUser = data;
   },
   LOGOUT_USER(state) {
-    state.connectedUser = null
+    state.connectedUser = null;
   }
 }
 

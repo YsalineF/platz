@@ -43,5 +43,14 @@ const app = new Vue({
       this.$store.dispatch('setCategories')
       this.$store.dispatch('setUsers')
       this.$store.dispatch('setCommentaires')
+      // Inspîration : https://stackoverflow.com/questions/51892979/how-to-stay-logged-in-even-after-page-refresh-with-vuex
+      // Vérifie si un item "connected" existe dans le sessionStorage (à check dans inspecteur >network > session storage)
+      if(sessionStorage.getItem('connected')) {
+        // Place l'item dans une variable car on doit obligatoirement la traduire en JSON
+        let connected = sessionStorage.getItem('connected')
+        // Creation d'un objet de type JSON
+        let connectedInJson = JSON.parse(connected)
+        this.$store.dispatch('loginUser', connectedInJson)
+      }
     }
 });

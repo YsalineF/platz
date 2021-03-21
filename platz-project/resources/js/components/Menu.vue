@@ -16,6 +16,10 @@
           <img :src="'assets/img/icon-premium.svg'" alt="no filter" title="No Filter" height="38" width="90">
       </div>
     </router-link>
+
+    <router-link v-if="$store.state.connectedUser" to="/add">
+      <button class="button-add" type="button" name="button">Add a resource</button>
+    </router-link>
   </div>
 </div>
 
@@ -32,4 +36,13 @@ export default {
 
 </script>
 <style lang="css" scoped>
+.button-add {
+  display: block;
+  float: left;
+  font-family: Helvetica, sans-serif;
+  width: auto;
+  height: auto;
+  margin-top: 20px;
+  border-radius: 5px;
+}
 </style>

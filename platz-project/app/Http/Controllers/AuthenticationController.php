@@ -26,6 +26,10 @@ class AuthenticationController extends Controller {
             'email' => $attr['email']
             ]);
 
+    return response()->json([
+      'user'=>$user
+    ]);
+
   }
 
   // Fonction qui permet au user de se connecter
@@ -42,6 +46,10 @@ class AuthenticationController extends Controller {
         }
 
      $user = User::where('email', $request->email)->first();
+
+     return response()->json([
+         'user' => $user
+     ]);
   }
 
   // Fonction qui permet de se deconnecter en invalidant la session

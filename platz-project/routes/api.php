@@ -50,3 +50,6 @@ Route::post('/auth/login', [AuthenticationController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function() {
   Route::post('/logout', [AuthenticationController::class, 'logout']);
 });
+
+// Ajout d'une ressource
+Route::post('/add', [Ressources::class, 'add']);
