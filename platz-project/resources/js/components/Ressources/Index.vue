@@ -28,10 +28,10 @@
     <div id="wrapper-oldnew">
       <div class="oldnew">
         <div class="wrapper-oldnew-prev">
-          <div id="oldnew-prev"></div>
+          <div id="oldnew-prev" @click="previousRessources"></div>
         </div>
         <div class="wrapper-oldnew-next">
-          <div id="oldnew-next"></div>
+          <div id="oldnew-next" @click="moreRessources"></div>
         </div>
       </div>
     </div>
@@ -44,7 +44,8 @@ export default {
     return {
       params: {
         start: 0,
-        end: 20
+        end: 20,
+        more: 20
       }
     }
   },
@@ -64,6 +65,35 @@ export default {
         // Retourne la catégorie de la ressource choisie
         return this.$store.getters.getCategoriesByRessourceId(ressource)
       }
+    },
+  },
+  methods: {
+    // Permet de charger plus de ressources (nombre defini via l'element "more" des params)
+    moreRessources() {
+      // On verifie si l'element "end" des params est plus petit que le nombre de ressources dans la db
+      // si c'est le cas, on ajoute l'element "more" aux elements "start" et "end" des params
+      if(this.params.end <= this.$store.state.ressources.length) {
+        this.params.start += this.params.more
+        this.params.end += this.params.more
+        // Appel de la methode scrollToTop(), si on ne l'utilise pas, on reste en bas de la fenetre
+        this.scrollToTop()
+      }
+    },
+    // Permet de charger les ressources précédentes (ex: les 20 dernières) si on a chargé les 20 suivantes
+    previousRessources() {
+      // On verifie si l'element "start" des params est different de 0
+      // si c'est le cas, on retire l'element "more" aux elements "start" et "end" des params
+      if(this.params.start !== 0) {
+        this.params.start -= this.params.more
+        this.params.start -= this.params.more
+        // Appel de la methode scrollToTop(), si on ne l'utilise pas, on reste en bas de la fenetre
+        this.scrollToTop()
+      }
+    },
+    // Permet de scroll au top de la fenetre quand on charge plus/moins de ressources
+    scrollToTop() {
+      // Inspiration https://stackoverflow.com/questions/50449123/vue-js-scroll-to-top-of-page-for-same-route
+      window.scrollTo(0,0)
     }
   }
 }

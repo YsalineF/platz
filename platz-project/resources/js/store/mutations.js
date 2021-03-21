@@ -1,5 +1,7 @@
 let mutations = {
   SET_RESSOURCES(state, data) {
+    // Inspiration : https://stackoverflow.com/questions/42225073/how-to-sort-an-array-by-date-using-vue-js-2
+    data.sort((a,b) => new Date(b.created_at) - new Date(a.created_at))
     state.ressources = data;
   },
   SET_CATEGORIES(state, data) {
@@ -10,6 +12,12 @@ let mutations = {
   },
   SET_COMMENTAIRES(state, data) {
     state.commentaires = data;
+  },
+  LOGIN_USER(state, data) {
+    state.connectedUser = true
+  },
+  LOGOUT_USER(state) {
+    state.connectedUser = null
   }
 }
 
