@@ -6,6 +6,8 @@ import Router from 'vue-router'
 // Chargement des composants des différentes routes
 import RessourcesIndex from './components/ressources/Index'
 import RessourceShow from './components/ressources/Show'
+import Login from './components/Login'
+import Register from './components/Register'
 
 
 // Création du routing
@@ -26,6 +28,16 @@ export default new Router({
       path: '/ressources/categories/:id',
       name: 'categories.show',
       component: RessourcesIndex
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register
     }
   ]
 })

@@ -18,6 +18,12 @@ let actions = {
     // Transaction AJAX
     axios.get('api/commentaires')
           .then(responsePHP => commit('SET_COMMENTAIRES', responsePHP.data))
+  },
+  loginUser({commit}, data) {
+    commit('LOGIN_USER', data)
+  },
+  logoutUser({commit}) {
+    commit('LOGOUT_USER')
   }
 }
 
