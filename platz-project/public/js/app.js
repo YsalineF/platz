@@ -2014,7 +2014,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       params: {
         start: 0,
-        end: 20
+        end: 20,
+        more: 20
       }
     };
   },
@@ -2034,6 +2035,35 @@ __webpack_require__.r(__webpack_exports__);
         // Retourne la catégorie de la ressource choisie
         return this.$store.getters.getCategoriesByRessourceId(ressource);
       };
+    }
+  },
+  methods: {
+    // Permet de charger plus de ressources (nombre defini via l'element "more" des params)
+    moreRessources: function moreRessources() {
+      // On verifie si l'element "end" des params est plus petit que le nombre de ressources dans la db
+      // si c'est le cas, on ajoute l'element "more" aux elements "start" et "end" des params
+      if (this.params.end <= this.$store.state.ressources.length) {
+        this.params.start += this.params.more;
+        this.params.end += this.params.more; // Appel de la methode scrollToTop(), si on ne l'utilise pas, on reste en bas de la fenetre
+
+        this.scrollToTop();
+      }
+    },
+    // Permet de charger les ressources précédentes (ex: les 20 dernières) si on a chargé les 20 suivantes
+    previousRessources: function previousRessources() {
+      // On verifie si l'element "start" des params est different de 0
+      // si c'est le cas, on retire l'element "more" aux elements "start" et "end" des params
+      if (this.params.start !== 0) {
+        this.params.start -= this.params.more;
+        this.params.start -= this.params.more; // Appel de la methode scrollToTop(), si on ne l'utilise pas, on reste en bas de la fenetre
+
+        this.scrollToTop();
+      }
+    },
+    // Permet de scroll au top de la fenetre quand on charge plus/moins de ressources
+    scrollToTop: function scrollToTop() {
+      // Inspiration https://stackoverflow.com/questions/50449123/vue-js-scroll-to-top-of-page-for-same-route
+      window.scrollTo(0, 0);
     }
   }
 });
@@ -60531,27 +60561,26 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _vm._m(0)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "wrapper-oldnew" } }, [
+    _c("div", { attrs: { id: "wrapper-oldnew" } }, [
       _c("div", { staticClass: "oldnew" }, [
         _c("div", { staticClass: "wrapper-oldnew-prev" }, [
-          _c("div", { attrs: { id: "oldnew-prev" } })
+          _c("div", {
+            attrs: { id: "oldnew-prev" },
+            on: { click: _vm.previousRessources }
+          })
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "wrapper-oldnew-next" }, [
-          _c("div", { attrs: { id: "oldnew-next" } })
+          _c("div", {
+            attrs: { id: "oldnew-next" },
+            on: { click: _vm.moreRessources }
+          })
         ])
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
