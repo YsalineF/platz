@@ -61,7 +61,7 @@
         </div>
         <!-- {{commentaires}} -->
         <div class="post-reply" v-for="commentaire in commentaires" :key="commentaire.id">
-            <div class="">
+            <div class="image-reply-post">
               <img :src="`assets/img/${user(commentaire).avatar}`" :alt="user(commentaire).name" />
             </div>
 
@@ -75,12 +75,14 @@
             <div class="text-reply-post">{{ commentaire.content }}</div>
         </div>
 
-        <div class="post-send">
+        <div class="post-send" v-if="$store.state.connectedUser">
           <div id="main-post-send">
             <div id="title-post-send">Add your comment</div>
-            <form id="contact" method="post" action="/onclickprod/formsubmit_op.asp">
+            <form id="contact" @submit.prevent="addComment">
               <fieldset>
-                <p><textarea id="message" name="message" maxlength="500" placeholder="Votre Message" tabindex="5" cols="30" rows="4"></textarea></p>
+                <p>
+                  <textarea v-model="addCommentForm.comment" id="message" name="message" maxlength="500" placeholder="Votre Message" tabindex="5" cols="30" rows="4" required></textarea>
+                </p>
               </fieldset>
               <div style="text-align:center;"><input type="submit" name="envoi" value="Envoyer" /></div>
             </form>
@@ -98,7 +100,13 @@
     data() {
       return {
         // Initialise à null l'id de la ressource
-        ressourceId: null
+        ressourceId: null,
+        // Initialise à null les éléments du formulaire d'ajout d'un commentaire
+        addCommentForm: {
+          comment: '',
+          ressource: '',
+          user: ''
+        }
       }
     },
     methods: {
@@ -106,6 +114,16 @@
         if(value) {
           return moment(String(value)).format('MMM DD, YYYY')
         }
+      },
+      addComment() {
+        this.addCommentForm.ressource = this.ressource.id
+        this.addCommentForm.user = this.$store.state.connectedUser.id
+        axios.post('api/commentaires/add', this.addCommentForm)
+              .then(x => {
+                this.$store.dispatch('addComment', x.data)
+                // On clear le champ visible du formulaire
+                this.addCommentForm.comment = ""
+              })
       }
     },
     computed: {
