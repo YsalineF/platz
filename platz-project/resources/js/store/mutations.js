@@ -18,6 +18,9 @@ let mutations = {
   },
   LOGOUT_USER(state) {
     state.connectedUser = null;
+  },
+  ADD_COMMENT(state, data) {
+    state.commentaires.push(data);
   }
 }
 

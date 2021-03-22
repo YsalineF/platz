@@ -37,6 +37,7 @@ let getters = {
   },
 
   /* ----------------------- USERS ----------------------- */
+  // Retourne le user en fonction de l'élément id de la ressource
   getUserByRessourceId(state) {
     return function(data) {
       return state.users.find(user => user.id === data.user_id)
@@ -44,21 +45,23 @@ let getters = {
   },
 
   /* ---------------------- COMMENTAIRES ------------------*/
+  // Retourne tous les commentaires
   getCommentaires(state){
     return state.commentaires;
   },
-
+  // Retourne le commentaire en fonction de son id
   getCommentaireById(state) {
     return function (id) {
       return state.commentaires.find(commentaire => commentaire.id == id);
     }
   },
-
+  // Retourne les commentaires en fonction de l'élément id de la ressource
   getCommentairesByRessourceId(state) {
     return function (id){
       return state.commentaires.filter(commentaires => commentaires.ressource.id == id);
+    }
   }
-},
+
 
 }
 

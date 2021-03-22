@@ -16,7 +16,7 @@
       </div>
       <button>Register</button>
     </form>
-    <p>Already hava an account ?</p>
+    <p>Already have an account ?</p>
     <router-link to="/login">Sign in</router-link>
   </div>
 </template>

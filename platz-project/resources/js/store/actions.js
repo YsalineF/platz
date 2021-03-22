@@ -24,6 +24,9 @@ let actions = {
   },
   logoutUser({commit}) {
     commit('LOGOUT_USER')
+  },
+  addComment({commit}, data) {
+    commit('ADD_COMMENT', data)
   }
 }
 
