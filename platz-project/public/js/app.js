@@ -2462,6 +2462,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      // ressouces,
       params: {
         start: 0,
         end: 20,
@@ -2494,10 +2495,7 @@ __webpack_require__.r(__webpack_exports__);
       // si c'est le cas, on "réinitialise" le params "start" à 20 et le params "end" avec le nombre de ressources dans la db
       if (this.params.end >= this.$store.state.ressources.length) {
         this.params.start = 20;
-        this.params.end = this.$store.state.ressources.length;
-        console.log("if : " + this.params.start);
-        console.log("if : " + this.params.end);
-        console.log(this.$store.state.ressources.length + 1); // Appel de la methode scrollToTop().
+        this.params.end = this.$store.state.ressources.length; // Appel de la methode scrollToTop().
         // Si on ne l'utilise pas, on reste en bas de la fenetre
 
         this.scrollToTop();
@@ -2515,7 +2513,7 @@ __webpack_require__.r(__webpack_exports__);
       // si c'est le cas, on retire l'element "more" aux elements "start" et "end" des params
       if (this.params.start !== 0) {
         this.params.start -= this.params.more;
-        this.params.start -= this.params.more; // Appel de la methode scrollToTop(), si on ne l'utilise pas, on reste en bas de la fenetre
+        this.params.end -= this.params.more; // Appel de la methode scrollToTop(), si on ne l'utilise pas, on reste en bas de la fenetre
 
         this.scrollToTop();
       }
