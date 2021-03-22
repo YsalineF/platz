@@ -23,6 +23,10 @@
     <router-link v-if="$store.state.connectedUser && $route.name === 'show'" :to="`/edit/${ressourceId}`">
       <button class="button-edit" type="button" name="button">Edit resource</button>
     </router-link>
+    <!-- Utilisation de <a> car router-link ne fonctionne pas sans le "to" -->
+    <a v-if="$store.state.connectedUser && $route.name === 'show'">
+      <button class="button-delete" v-on:click="deleteRessource()" type="button" name="button">Delete resource</button>
+    </a>
   </div>
 </div>
 
@@ -32,6 +36,9 @@
 export default {
   data() {
     return {
+      params: {
+        id: ''
+      }
     }
   },
   computed: {
@@ -45,13 +52,21 @@ export default {
       let ressourceId = this.$route.params.id
       return ressourceId
     }
-
+  },
+  methods: {
+    // Permet de supprimer la ressource sur laquelle on se trouve
+    // la suppression se fait via son id
+    deleteRessource() {
+      this.params.id = this.ressourceId
+      axios.post('api/delete', this.params)
+      this.$router.push("/")
+    }
   }
 }
 
 </script>
 <style lang="css" scoped>
-.button-add, .button-edit {
+.button-add, .button-edit, .button-delete {
   display: block;
   float: left;
   font-family: Helvetica, sans-serif;
@@ -60,7 +75,7 @@ export default {
   margin-top: 20px;
   border-radius: 5px;
 }
-.button-edit {
+.button-edit, .button-delete {
   margin-left: 10px;
 }
 </style>
