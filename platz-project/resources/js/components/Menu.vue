@@ -20,6 +20,9 @@
     <router-link v-if="$store.state.connectedUser" to="/add">
       <button class="button-add" type="button" name="button">Add a resource</button>
     </router-link>
+    <router-link v-if="$store.state.connectedUser && $route.name === 'show'" :to="`/edit/${ressourceId}`">
+      <button class="button-edit" type="button" name="button">Edit resource</button>
+    </router-link>
   </div>
 </div>
 
@@ -27,16 +30,28 @@
 
 <script>
 export default {
-  computed: {
-      categories() {
-      return this.$store.getters.getCategories;
+  data() {
+    return {
     }
+  },
+  computed: {
+    categories() {
+      // Retourne toutes les categories
+      return this.$store.getters.getCategories;
+    },
+    // Retourne l'id de la ressource actuelle et permet d'avoir acces au bouton
+    // pour accéder au formulaire d'edit de la ressource
+    ressourceId() {
+      let ressourceId = this.$route.params.id
+      return ressourceId
+    }
+
   }
 }
 
 </script>
 <style lang="css" scoped>
-.button-add {
+.button-add, .button-edit {
   display: block;
   float: left;
   font-family: Helvetica, sans-serif;
@@ -44,5 +59,8 @@ export default {
   height: auto;
   margin-top: 20px;
   border-radius: 5px;
+}
+.button-edit {
+  margin-left: 10px;
 }
 </style>

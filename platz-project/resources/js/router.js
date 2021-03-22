@@ -9,6 +9,7 @@ import RessourceShow from './components/ressources/Show'
 import Login from './components/Login'
 import Register from './components/Register'
 import AddRessources from './components/AddRessources'
+import EditRessources from './components/EditRessources'
 
 
 // Création du routing
@@ -44,6 +45,11 @@ export default new Router({
       path: '/add',
       name: 'add',
       component: AddRessources
+    },
+    {
+      path: '/edit/:id',
+      name: 'edit',
+      component: EditRessources
     }
   ]
 })
