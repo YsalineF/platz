@@ -6,21 +6,21 @@
     <form action="#" @submit.prevent="editRessource">
       <div class="form-element">
         Name
-        <input type="text" name="nom" placeholder="name" v-model="editForm.nom" required >
+        <input type="text" name="nom" placeholder="name" v-model="editForm.nom">
       </div>
       <div class="form-element">
         Description
-        <textarea name="name" rows="8" cols="80" placeholder="description" v-model="editForm.description" required></textarea>
+        <textarea name="description" rows="8" cols="80" placeholder="description" v-model="editForm.description"></textarea>
       </div>
       <div class="form-element">
         Image
-        <input type="file" @change="imageChange" name="image" value="" required>
+        <input type="file" @change="imageChange" name="image" value="">
         <img :src="`assets/img/${ressource.image}`" v-if="!imagePreview" />
         <img v-bind:src="imagePreview" width="100" height="100" v-show="showPreview"/>
       </div>
       <div class="form-element">
         Categorie
-        <select class="" v-model="editForm.categorie" name="" required>
+        <select class="" v-model="editForm.categorie" name="">
           <option value="">Categorie</option>
           <option v-for="categorie in categories" :key="categorie.id" :value="categorie.id">{{ categorie.nom }}</option>
         </select>
@@ -37,13 +37,12 @@
 
 <script>
 export default {
-  name: 'Edit',
   data() {
     return {
       // Instancie le tableau editForm avec des éléments null
       editForm: {
         id: null,
-        name: '',
+        nom: '',
         description: '',
         image: '',
         categorie: '',

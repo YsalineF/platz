@@ -157,9 +157,7 @@
       },
       users() {
           return this.$store.getters.getUsers;
-
-      },
-
+      }
     }
   }
 </script>

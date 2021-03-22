@@ -40,16 +40,15 @@ class Ressources extends Controller
 
     //Fonction qui permet d'éditer une ressource en modifiant les éléments de la db avec les nouveaux éléments
     // et qui permet le traitement d'une image afin que l'image en question se retrouve dans le dossier "assets/img"
-    //
     public function edit(Request $request) {
       $ressource = Ressource::find($request->id);
       $ressource->nom = $request->nom;
 
       if ($request->file('image')) {
         $image = $request->file('image');
-        $imageName = $image->getClientOriginalName();
-        $image->move(public_path('assets/img'), $imageName);
-        $ressource->image = $imageName;
+        $imageRessource = $image->getClientOriginalName();
+        $image->move(public_path('assets/img'), $imageRessource);
+        $ressource->image = $imageRessource;
       }
       $ressource->description = $request->description;
       $ressource->categorie_id = $request->categorie;
