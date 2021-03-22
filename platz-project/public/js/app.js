@@ -2236,9 +2236,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {};
+    return {
+      params: {
+        id: ''
+      }
+    };
   },
   computed: {
     categories: function categories() {
@@ -2250,6 +2258,15 @@ __webpack_require__.r(__webpack_exports__);
     ressourceId: function ressourceId() {
       var ressourceId = this.$route.params.id;
       return ressourceId;
+    }
+  },
+  methods: {
+    // Permet de supprimer la ressource sur laquelle on se trouve
+    // la suppression se fait via son id
+    deleteRessource: function deleteRessource() {
+      this.params.id = this.ressourceId;
+      axios.post('api/delete', this.params);
+      this.$router.push("/");
     }
   }
 });
@@ -7632,7 +7649,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.button-add[data-v-7fa2c4ca], .button-edit[data-v-7fa2c4ca] {\r\n  display: block;\r\n  float: left;\r\n  font-family: Helvetica, sans-serif;\r\n  width: auto;\r\n  height: auto;\r\n  margin-top: 20px;\r\n  border-radius: 5px;\n}\n.button-edit[data-v-7fa2c4ca] {\r\n  margin-left: 10px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.button-add[data-v-7fa2c4ca], .button-edit[data-v-7fa2c4ca], .button-delete[data-v-7fa2c4ca] {\r\n  display: block;\r\n  float: left;\r\n  font-family: Helvetica, sans-serif;\r\n  width: auto;\r\n  height: auto;\r\n  margin-top: 20px;\r\n  border-radius: 5px;\n}\n.button-edit[data-v-7fa2c4ca], .button-delete[data-v-7fa2c4ca] {\r\n  margin-left: 10px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -62256,6 +62273,24 @@ var render = function() {
                   attrs: { type: "button", name: "button" }
                 },
                 [_vm._v("Edit resource")]
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.$store.state.connectedUser && _vm.$route.name === "show"
+          ? _c("a", [
+              _c(
+                "button",
+                {
+                  staticClass: "button-delete",
+                  attrs: { type: "button", name: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteRessource()
+                    }
+                  }
+                },
+                [_vm._v("Delete resource")]
               )
             ])
           : _vm._e()
