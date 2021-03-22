@@ -42,6 +42,7 @@
 export default {
   data() {
     return {
+      // ressouces,
       params: {
         start: 0,
         end: 20,
@@ -75,9 +76,6 @@ export default {
       if(this.params.end >= this.$store.state.ressources.length) {
         this.params.start = 20
         this.params.end = this.$store.state.ressources.length
-        console.log("if : " +this.params.start)
-        console.log("if : " + this.params.end)
-        console.log((this.$store.state.ressources.length + 1))
         // Appel de la methode scrollToTop().
         // Si on ne l'utilise pas, on reste en bas de la fenetre
         this.scrollToTop()
@@ -96,7 +94,7 @@ export default {
       // si c'est le cas, on retire l'element "more" aux elements "start" et "end" des params
       if(this.params.start !== 0) {
         this.params.start -= this.params.more
-        this.params.start -= this.params.more
+        this.params.end -= this.params.more
         // Appel de la methode scrollToTop(), si on ne l'utilise pas, on reste en bas de la fenetre
         this.scrollToTop()
       }
