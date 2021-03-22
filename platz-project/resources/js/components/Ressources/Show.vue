@@ -97,6 +97,8 @@
   export default {
     data() {
       return {
+        // Initialise à null l'id de la ressource
+        ressourceId: null
       }
     },
     methods: {
@@ -110,6 +112,7 @@
       ressource() {
         // Recuperation de la variable d'URL d'une route du router (ici l'id de la ressource selectionnee)
         let id = this.$route.params.id;
+        this.ressourceId = id;
         return this.$store.getters.getRessourceById(id);
       },
       categorie() {
