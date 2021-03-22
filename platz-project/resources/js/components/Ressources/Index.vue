@@ -70,12 +70,23 @@ export default {
   methods: {
     // Permet de charger plus de ressources (nombre defini via l'element "more" des params)
     moreRessources() {
-      // On verifie si l'element "end" des params est plus petit que le nombre de ressources dans la db
-      // si c'est le cas, on ajoute l'element "more" aux elements "start" et "end" des params
-      if(this.params.end <= this.$store.state.ressources.length) {
+      // On verifie si l'element "end" des params est plus grand/égal au nombre de ressources dans la db
+      // si c'est le cas, on "réinitialise" le params "start" à 20 et le params "end" avec le nombre de ressources dans la db
+      if(this.params.end >= this.$store.state.ressources.length) {
+        this.params.start = 20
+        this.params.end = this.$store.state.ressources.length
+        console.log("if : " +this.params.start)
+        console.log("if : " + this.params.end)
+        console.log((this.$store.state.ressources.length + 1))
+        // Appel de la methode scrollToTop().
+        // Si on ne l'utilise pas, on reste en bas de la fenetre
+        this.scrollToTop()
+      }
+      // Si l'element "end" des params est plus petit que le nombre de ressources dans la db
+      // On ajoute aux params "start" et "end", le params "more"
+      else {
         this.params.start += this.params.more
         this.params.end += this.params.more
-        // Appel de la methode scrollToTop(), si on ne l'utilise pas, on reste en bas de la fenetre
         this.scrollToTop()
       }
     },
