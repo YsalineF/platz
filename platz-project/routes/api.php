@@ -45,11 +45,12 @@ Route::post('/auth/register', [AuthenticationController::class, 'register']);
 // Connexion compte user
 Route::post('/auth/login', [AuthenticationController::class, 'login']);
 
-// Deconnexion compte user
 // Utilisation du middleware pour proteger la route et la rendre accessible uniquement aux users connectes
 Route::group(['middleware' => ['auth:sanctum']], function() {
+  // Deconnexion compte user
   Route::post('/logout', [AuthenticationController::class, 'logout']);
+  // Ajout d'une ressource
+  Route::post('/add', [Ressources::class, 'add']);
+  // Edition d'une ressource
+  Route::post('/edit', [Ressources::class, 'edit']);
 });
-
-// Ajout d'une ressource
-Route::post('/add', [Ressources::class, 'add']);
