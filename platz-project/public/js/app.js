@@ -2627,12 +2627,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       // Initialise à null l'id de la ressource
-      ressourceId: null
+      ressourceId: null,
+      // Initialise à null les éléments du formulaire d'ajout d'un commentaire
+      addCommentForm: {
+        comment: '',
+        ressource: '',
+        user: ''
+      }
     };
   },
   methods: {
@@ -2640,6 +2648,18 @@ __webpack_require__.r(__webpack_exports__);
       if (value) {
         return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value)).format('MMM DD, YYYY');
       }
+    },
+    addComment: function addComment() {
+      var _this = this;
+
+      this.addCommentForm.ressource = this.ressource.id;
+      this.addCommentForm.user = this.$store.state.connectedUser.id;
+      axios.post('api/commentaires/add', this.addCommentForm).then(function (x) {
+        _this.$store.dispatch('addComment', x.data); // On clear le champ visible du formulaire
+
+
+        _this.addCommentForm.comment = "";
+      });
     }
   },
   computed: {
@@ -2898,6 +2918,10 @@ var actions = {
   logoutUser: function logoutUser(_ref6) {
     var commit = _ref6.commit;
     commit('LOGOUT_USER');
+  },
+  addComment: function addComment(_ref7, data) {
+    var commit = _ref7.commit;
+    commit('ADD_COMMENT', data);
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (actions);
@@ -2970,6 +2994,7 @@ var getters = {
   },
 
   /* ----------------------- USERS ----------------------- */
+  // Retourne le user en fonction de l'élément id de la ressource
   getUserByRessourceId: function getUserByRessourceId(state) {
     return function (data) {
       return state.users.find(function (user) {
@@ -2979,9 +3004,11 @@ var getters = {
   },
 
   /* ---------------------- COMMENTAIRES ------------------*/
+  // Retourne tous les commentaires
   getCommentaires: function getCommentaires(state) {
     return state.commentaires;
   },
+  // Retourne le commentaire en fonction de son id
   getCommentaireById: function getCommentaireById(state) {
     return function (id) {
       return state.commentaires.find(function (commentaire) {
@@ -2989,6 +3016,7 @@ var getters = {
       });
     };
   },
+  // Retourne les commentaires en fonction de l'élément id de la ressource
   getCommentairesByRessourceId: function getCommentairesByRessourceId(state) {
     return function (id) {
       return state.commentaires.filter(function (commentaires) {
@@ -3034,6 +3062,9 @@ var mutations = {
   },
   LOGOUT_USER: function LOGOUT_USER(state) {
     state.connectedUser = null;
+  },
+  ADD_COMMENT: function ADD_COMMENT(state, data) {
+    state.commentaires.push(data);
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mutations);
@@ -62533,7 +62564,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("p", [_vm._v("Already hava an account ?")]),
+      _c("p", [_vm._v("Already have an account ?")]),
       _vm._v(" "),
       _c("router-link", { attrs: { to: "/login" } }, [_vm._v("Sign in")])
     ],
@@ -62786,7 +62817,7 @@ var render = function() {
               "div",
               { key: commentaire.id, staticClass: "post-reply" },
               [
-                _c("div", {}, [
+                _c("div", { staticClass: "image-reply-post" }, [
                   _c("img", {
                     attrs: {
                       src: "assets/img/" + _vm.user(commentaire).avatar,
@@ -62812,7 +62843,69 @@ var render = function() {
             )
           }),
           _vm._v(" "),
-          _vm._m(4)
+          _vm.$store.state.connectedUser
+            ? _c("div", { staticClass: "post-send" }, [
+                _c("div", { attrs: { id: "main-post-send" } }, [
+                  _c("div", { attrs: { id: "title-post-send" } }, [
+                    _vm._v("Add your comment")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      attrs: { id: "contact" },
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.addComment($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("fieldset", [
+                        _c("p", [
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.addCommentForm.comment,
+                                expression: "addCommentForm.comment"
+                              }
+                            ],
+                            attrs: {
+                              id: "message",
+                              name: "message",
+                              maxlength: "500",
+                              placeholder: "Votre Message",
+                              tabindex: "5",
+                              cols: "30",
+                              rows: "4",
+                              required: ""
+                            },
+                            domProps: { value: _vm.addCommentForm.comment },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.addCommentForm,
+                                  "comment",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(4)
+                    ]
+                  )
+                ])
+              ])
+            : _vm._e()
         ],
         2
       )
@@ -62886,46 +62979,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "post-send" }, [
-      _c("div", { attrs: { id: "main-post-send" } }, [
-        _c("div", { attrs: { id: "title-post-send" } }, [
-          _vm._v("Add your comment")
-        ]),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            attrs: {
-              id: "contact",
-              method: "post",
-              action: "/onclickprod/formsubmit_op.asp"
-            }
-          },
-          [
-            _c("fieldset", [
-              _c("p", [
-                _c("textarea", {
-                  attrs: {
-                    id: "message",
-                    name: "message",
-                    maxlength: "500",
-                    placeholder: "Votre Message",
-                    tabindex: "5",
-                    cols: "30",
-                    rows: "4"
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticStyle: { "text-align": "center" } }, [
-              _c("input", {
-                attrs: { type: "submit", name: "envoi", value: "Envoyer" }
-              })
-            ])
-          ]
-        )
-      ])
+    return _c("div", { staticStyle: { "text-align": "center" } }, [
+      _c("input", {
+        attrs: { type: "submit", name: "envoi", value: "Envoyer" }
+      })
     ])
   }
 ]

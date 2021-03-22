@@ -55,4 +55,6 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
   Route::post('/edit', [Ressources::class, 'edit']);
   // Suppression d'une ressource
   Route::post('/delete', [Ressources::class, 'delete']);
+  // Ajout d'un commentaire
+  Route::post('/commentaires/add', [Commentaires::class, 'add']);
 });
