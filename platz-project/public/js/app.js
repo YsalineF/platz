@@ -2036,13 +2036,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'Edit',
   data: function data() {
     return {
       // Instancie le tableau editForm avec des éléments null
       editForm: {
         id: null,
-        name: '',
+        nom: '',
         description: '',
         image: '',
         categorie: '',
@@ -61913,12 +61912,7 @@ var render = function() {
                     expression: "editForm.nom"
                   }
                 ],
-                attrs: {
-                  type: "text",
-                  name: "nom",
-                  placeholder: "name",
-                  required: ""
-                },
+                attrs: { type: "text", name: "nom", placeholder: "name" },
                 domProps: { value: _vm.editForm.nom },
                 on: {
                   input: function($event) {
@@ -61943,11 +61937,10 @@ var render = function() {
                   }
                 ],
                 attrs: {
-                  name: "name",
+                  name: "description",
                   rows: "8",
                   cols: "80",
-                  placeholder: "description",
-                  required: ""
+                  placeholder: "description"
                 },
                 domProps: { value: _vm.editForm.description },
                 on: {
@@ -61964,7 +61957,7 @@ var render = function() {
             _c("div", { staticClass: "form-element" }, [
               _vm._v("\n      Image\n      "),
               _c("input", {
-                attrs: { type: "file", name: "image", value: "", required: "" },
+                attrs: { type: "file", name: "image", value: "" },
                 on: { change: _vm.imageChange }
               }),
               _vm._v(" "),
@@ -62000,7 +61993,7 @@ var render = function() {
                       expression: "editForm.categorie"
                     }
                   ],
-                  attrs: { name: "", required: "" },
+                  attrs: { name: "" },
                   on: {
                     change: function($event) {
                       var $$selectedVal = Array.prototype.filter
