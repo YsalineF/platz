@@ -55,12 +55,6 @@ class AuthenticationController extends Controller {
   // Fonction qui permet de se deconnecter en invalidant la session
   public function logout(Request $request) {
      $request->session()->invalidate();
-     $request->session()->regenerateToken();
-
-     return response()->json([
-            'status_code' => 200,
-            'message' => 'Log out successfully !'
-        ]);
   }
 
 }
